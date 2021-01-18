@@ -13,6 +13,7 @@ public class LoggingConfiguration {
         filter.setIncludeClientInfo(true);
         filter.setIncludeHeaders(true);
         filter.setIncludePayload(true);
+        filter.setMaxPayloadLength(10000);
         return filter;
     }
 }
