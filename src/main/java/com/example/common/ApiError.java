@@ -30,7 +30,6 @@ public class ApiError implements Serializable {
 
     private String message;
 
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final List<Detail> details = new ArrayList<>();
 

@@ -43,7 +43,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return apiError;
     }
 
-    private String getMessage(MessageSourceResolvable resolvable, WebRequest request) {
+    private String getMessage(
+            MessageSourceResolvable resolvable, WebRequest request
+    ) {
         return messageSource.getMessage(resolvable, request.getLocale());
     }
 
@@ -57,15 +59,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .forEach(e -> apiError.addDetail(e.getObjectName(), getMessage(e, request)));
         ex.getBindingResult().getFieldErrors().stream()
                 .forEach(e -> apiError.addDetail(e.getField(), getMessage(e, request)));
-        return super.handleExceptionInternal(ex, apiError, headers, status, request);
+        return super.handleExceptionInternal(
+                ex, apiError, headers, status, request
+        );
     }
 
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(
             Exception ex, Object body, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
+
         ApiError apiError = createApiError(ex, ex.getMessage());
-        return super.handleExceptionInternal(ex, apiError, headers, status, request);
+
+        return super.handleExceptionInternal(
+                ex, apiError, headers, status, request
+        );
     }
 
 }
