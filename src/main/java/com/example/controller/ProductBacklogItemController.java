@@ -1,4 +1,4 @@
-package com.example;
+package com.example.controller;
 
 import com.example.domain.model.ProductBacklogItem;
 import com.example.domain.resource.ProductBacklogItemResource;
@@ -17,7 +17,8 @@ public class ProductBacklogItemController {
     private final ProductBacklogItemService productBacklogItemService;
 
     public ProductBacklogItemController(
-            ProductBacklogItemService productBacklogItemService) {
+            ProductBacklogItemService productBacklogItemService
+    ) {
         this.productBacklogItemService = productBacklogItemService;
     }
 

@@ -16,7 +16,9 @@ public class ProductBacklogItemService {
 
     private final static int OFFSET = 0;
 
-    public ProductBacklogItemService(ProductBacklogItemMapper productBacklogItemMapper) {
+    public ProductBacklogItemService(
+            ProductBacklogItemMapper productBacklogItemMapper
+    ) {
         this.productBacklogItemMapper = productBacklogItemMapper;
     }
 
