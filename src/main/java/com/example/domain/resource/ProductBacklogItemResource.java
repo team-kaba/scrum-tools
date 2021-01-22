@@ -8,13 +8,13 @@ public class ProductBacklogItemResource implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
-    @Min(0)
-    private int storyPoint;
+    @NotBlank
+    @Pattern(regexp = "(?x) .? | ( \\\\2?+ (\\\\1|^.) )* ..")//FIXME : フィボナッチ数列 正規表現
+    private String storyPoint;
 
     @Min(1)
     @Max(3)
-    private int passion;
+    private int confidentDegree;
 
     @NotBlank
     @Size(max = 50)
@@ -23,20 +23,20 @@ public class ProductBacklogItemResource implements Serializable {
     @NotNull
     private OffsetDateTime accessAt;
 
-    public int getStoryPoint() {
+    public String getStoryPoint() {
         return storyPoint;
     }
 
-    public void setStoryPoint(int storyPoint) {
+    public void setStoryPoint(String storyPoint) {
         this.storyPoint = storyPoint;
     }
 
-    public int getPassion() {
-        return passion;
+    public int getConfidentDegree() {
+        return confidentDegree;
     }
 
-    public void setPassion(int passion) {
-        this.passion = passion;
+    public void setConfidentDegree(int confidentDegree) {
+        this.confidentDegree = confidentDegree;
     }
 
     public String getName() {

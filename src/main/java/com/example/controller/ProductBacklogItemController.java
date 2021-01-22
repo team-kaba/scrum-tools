@@ -31,9 +31,9 @@ public class ProductBacklogItemController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @GetMapping("{amount}")
+    @GetMapping()
     ResponseEntity<List<ProductBacklogItem>> getProductBacklogItem(
-            @PathVariable String amount
+            @RequestParam("amount") String amount
     ) {
         final List<ProductBacklogItem> productBacklogItems
                 = productBacklogItemService.select(amount);
