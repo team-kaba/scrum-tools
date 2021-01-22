@@ -1,15 +1,15 @@
 package com.example.domain.model;
 
 public class ProductBacklogItem {
-    private int storyPoint;
+    private String storyPoint;
     private int passion;
     private String name;
 
-    public int getStoryPoint() {
+    public String getStoryPoint() {
         return storyPoint;
     }
 
-    public void setStoryPoint(int storyPoint) {
+    public void setStoryPoint(String storyPoint) {
         this.storyPoint = storyPoint;
     }
 

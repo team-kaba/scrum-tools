@@ -5,13 +5,13 @@
 <mapper namespace="com.example.domain.mapper.ProductBacklogItemMapper">
     <insert id="insert" parameterType="com.example.domain.resource.ProductBacklogItemResource">
         INSERT
-        INTO product_backlog_item (story_point, passion, name, access_at)
-        VALUES (#{storyPoint}, #{passion}, #{name}, #{accessAt})
+        INTO product_backlog_item (story_point, confident_degree, name, access_at)
+        VALUES (#{storyPoint}, #{confidentDegree}, #{name}, #{accessAt})
     </insert>
     <select id="select" resultType="com.example.domain.model.ProductBacklogItem">
         SELECT
           story_point,
-          passion,
+          confident_degree,
           name
         FROM
           product_backlog_item
