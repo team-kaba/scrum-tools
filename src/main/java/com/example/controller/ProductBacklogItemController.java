@@ -5,6 +5,8 @@ import com.example.domain.resource.ProductBacklogItemResource;
 import com.example.domain.service.ProductBacklogItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +35,18 @@ public class ProductBacklogItemController {
 
     @GetMapping()
     ResponseEntity<List<ProductBacklogItem>> getProductBacklogItem(
+            // TODO : バリデーションの実装
             @RequestParam("amount") String amount
     ) {
         final List<ProductBacklogItem> productBacklogItems
                 = productBacklogItemService.select(amount);
         return new ResponseEntity(productBacklogItems, HttpStatus.OK);
+    }
+
+    @MessageMapping("/hello")
+    @SendTo("topic/greetings")
+    public List<ProductBacklogItem> greeting() throws Exception {
+        Thread.sleep(1000);
+        return productBacklogItemService.select("3");
     }
 }
