@@ -5,11 +5,11 @@ import sys
 
 
 def on_message(ws, message):
-    print(message)
+    print("Message: {message}")
 
 
 def on_error(ws, error):
-    print(error)
+    print(f"Error: {error}")
 
 
 def on_close(ws):
@@ -24,9 +24,7 @@ def on_open(ws):
             # isn't closed
             ws.send("Hello %d" % i)
             time.sleep(1)
-
         time.sleep(1)
-        print("Thread terminating...")
 
     Thread(target=run).start()
 
@@ -34,10 +32,10 @@ def on_open(ws):
 if __name__ == "__main__":
     websocket.enableTrace(True)
     if len(sys.argv) < 2:
-        host = "ws://echo.websocket.org/"
+        host = "ws://localhost:8080/"
     else:
         host = sys.argv[1]
-    ws = websocket.WebSocketApp(host,
+    ws = websocket.WebSocketApp(url=host,
                                 on_message=on_message,
                                 on_error=on_error,
                                 on_close=on_close)
