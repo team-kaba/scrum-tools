@@ -1,6 +1,6 @@
 package com.example.config.websocket;
 
-import com.example.handler.ExampleTextWebSocketHandler;
+import com.example.handler.ProductBacklogItemWebSocketHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
@@ -14,11 +14,11 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(exampleTextWebSocketHandler(), "/example");
+        registry.addHandler(productBacklogItemWebSocketHandler(), "/product-backlog-item/send");
     }
 
     @Bean
-    public WebSocketHandler exampleTextWebSocketHandler() {
-        return new ExampleTextWebSocketHandler();
+    public WebSocketHandler productBacklogItemWebSocketHandler() {
+        return new ProductBacklogItemWebSocketHandler();
     }
 }
