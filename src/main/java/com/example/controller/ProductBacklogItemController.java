@@ -1,18 +1,14 @@
 package com.example.controller;
 
-import com.example.domain.resource.Greeting;
-import com.example.domain.resource.HelloMessage;
+import com.example.domain.model.ProductBacklogItem;
 import com.example.domain.resource.ProductBacklogItemResource;
 import com.example.domain.service.ProductBacklogItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.HtmlUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class ProductBacklogItemController {
@@ -25,7 +21,7 @@ public class ProductBacklogItemController {
         this.productBacklogItemService = productBacklogItemService;
     }
 
-    @PostMapping(path = "create")
+    @PostMapping(path = "product-backlog-item/create")
     ResponseEntity<Void> postProductBacklogItem(
             @Validated
             @RequestBody ProductBacklogItemResource productBacklogItemResource
@@ -34,7 +30,7 @@ public class ProductBacklogItemController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    /*@GetMapping()
+    @GetMapping(path = "product-backlog-items")
     ResponseEntity<List<ProductBacklogItem>> getProductBacklogItem(
             // TODO : バリデーションの実装
             @RequestParam("amount") String amount
@@ -42,12 +38,5 @@ public class ProductBacklogItemController {
         final List<ProductBacklogItem> productBacklogItems
                 = productBacklogItemService.select(amount);
         return new ResponseEntity(productBacklogItems, HttpStatus.OK);
-    }*/
-
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
-        Thread.sleep(1000);
-        return new Greeting("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
     }
 }
