@@ -23,10 +23,11 @@ public class ProductBacklogItemController {
 
     @PostMapping(path = "product-backlog-item/create")
     ResponseEntity<Void> postProductBacklogItem(
-            @Validated
+            @RequestParam("amount") String amount
+            , @Validated
             @RequestBody ProductBacklogItemResource productBacklogItemResource
     ) {
-        productBacklogItemService.insert(productBacklogItemResource);
+        productBacklogItemService.insert(productBacklogItemResource, amount);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
