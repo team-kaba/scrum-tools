@@ -27,7 +27,7 @@ public class ProductBacklogItemController {
             , @Validated
             @RequestBody ProductBacklogItemResource productBacklogItemResource
     ) {
-        productBacklogItemService.insert(productBacklogItemResource, amount);
+        productBacklogItemService.insert(amount);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
