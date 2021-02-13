@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.domain.model.ProductBacklogItem;
 import com.example.domain.service.ProductBacklogItemService;
-import com.example.handler.RefinementActorListenerManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +14,10 @@ import java.util.List;
 public class ProductBacklogItemController {
 
   private final ProductBacklogItemService productBacklogItemService;
-  private final RefinementActorListenerManager refinementActorListenerManager;
 
   @Autowired
-  public ProductBacklogItemController(
-      ProductBacklogItemService productBacklogItemService,
-      RefinementActorListenerManager refinementActorListenerManager) {
+  public ProductBacklogItemController(ProductBacklogItemService productBacklogItemService) {
     this.productBacklogItemService = productBacklogItemService;
-    this.refinementActorListenerManager = refinementActorListenerManager;
   }
 
   @PostMapping(path = "product-backlog-item/create")

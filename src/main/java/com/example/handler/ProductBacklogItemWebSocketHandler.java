@@ -1,6 +1,5 @@
 package com.example.handler;
 
-import com.example.domain.model.RefinementActor;
 import com.example.domain.model.ProductBacklogItem;
 import com.example.domain.service.ProductBacklogItemService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,8 +29,7 @@ public class ProductBacklogItemWebSocketHandler extends TextWebSocketHandler {
     final String payload = message.getPayload();
     ProductBacklogItem productBacklogItem =
         objectMapper.readValue(payload, ProductBacklogItem.class);
-    service.insert(productBacklogItem);
-    service.subscribe(new RefinementActor(session, productBacklogItem));
+    service.insert(productBacklogItem, session);
   }
 
   @Override
