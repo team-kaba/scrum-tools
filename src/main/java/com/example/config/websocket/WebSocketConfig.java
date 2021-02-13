@@ -1,7 +1,6 @@
 package com.example.config.websocket;
 
-import com.example.domain.service.ProductBacklogItemMessageService;
-import com.example.handler.ProductBackLogItemWebSocketSender;
+import com.example.domain.service.ProductBacklogItemService;
 import com.example.handler.ProductBacklogItemWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
@@ -14,25 +13,21 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
-    private final ObjectMapper objectMapper;
-    private final ProductBacklogItemMessageService service;
-    private final ProductBackLogItemWebSocketSender sender;
+  private final ObjectMapper objectMapper;
+  private final ProductBacklogItemService service;
 
-    public WebSocketConfig(ObjectMapper objectMapper, ProductBacklogItemMessageService service,
-                           ProductBackLogItemWebSocketSender sender) {
-        this.objectMapper = objectMapper;
-        this.service = service;
-        this.sender = sender;
-    }
+  public WebSocketConfig(ObjectMapper objectMapper, ProductBacklogItemService service) {
+    this.objectMapper = objectMapper;
+    this.service = service;
+  }
 
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(productBacklogItemWebSocketHandler(), "/product-backlog-item/send");
-    }
+  @Override
+  public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+    registry.addHandler(productBacklogItemWebSocketHandler(), "/product-backlog-item/send");
+  }
 
-    @Bean
-    public WebSocketHandler productBacklogItemWebSocketHandler() {
-        return new ProductBacklogItemWebSocketHandler(this.objectMapper, this.service, this.sender);
-    }
-
+  @Bean
+  public WebSocketHandler productBacklogItemWebSocketHandler() {
+    return new ProductBacklogItemWebSocketHandler(this.objectMapper, this.service);
+  }
 }
