@@ -1,7 +1,7 @@
 package com.example.domain.service;
 
 import com.example.domain.model.ProductBacklogItem;
-import com.example.handler.ProductBacklogItemWebSocketReceiver;
+import com.example.domain.websocket_transceiver.ProductBacklogItemWebSocketReceiver;
 import com.example.infra.ProductBacklogItemRepository;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
