@@ -1,31 +1,29 @@
 package com.example.domain.model;
 
-public class ProductBacklogItem {
-    private String storyPoint;
-    private int passion;
-    private String name;
+import lombok.Getter;
+import lombok.Setter;
 
-    public String getStoryPoint() {
-        return storyPoint;
-    }
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
 
-    public void setStoryPoint(String storyPoint) {
-        this.storyPoint = storyPoint;
-    }
+@Getter
+@Setter
+public class ProductBacklogItem implements Serializable {
 
-    public int getPassion() {
-        return passion;
-    }
+  private static final long serialVersionUID = 1L;
 
-    public void setPassion(int passion) {
-        this.passion = passion;
-    }
+  @Size(min = 1, max = 3)
+  @Pattern(regexp = "[12358|13]") // FIXME : フィボナッチ数列 正規表現
+  private String storyPoint;
 
-    public String getName() {
-        return name;
-    }
+  @Min(1)
+  @Max(3)
+  private int confidentDegree;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  @NotBlank
+  @Size(max = 50)
+  private String name;
+
+  @NotNull private OffsetDateTime accessAt;
 }
