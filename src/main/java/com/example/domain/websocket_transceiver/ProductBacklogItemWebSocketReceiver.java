@@ -1,4 +1,4 @@
-package com.example.handler;
+package com.example.domain.websocket_transceiver;
 
 import com.example.domain.model.PokerEvent;
 import com.example.domain.model.ProductBacklogItem;
