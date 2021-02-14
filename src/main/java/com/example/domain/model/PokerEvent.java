@@ -1,5 +1,6 @@
 package com.example.domain.model;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.Getter;
 import lombok.Setter;
 
