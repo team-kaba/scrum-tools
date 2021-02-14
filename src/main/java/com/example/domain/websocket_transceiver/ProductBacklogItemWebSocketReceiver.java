@@ -19,7 +19,7 @@ public class ProductBacklogItemWebSocketReceiver {
   }
 
   public void receive(ProductBacklogItem productBacklogItem, WebSocketSession session) {
-    pokerEvent.receive(productBacklogItem);
     sender.registerWebSocketSession(session);
+    pokerEvent.receive(productBacklogItem);
   }
 }
