@@ -1,14 +1,8 @@
 package com.example.domain.model;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
 public class PokerEvent {
 
   /** イベントのメンバー数 */
@@ -22,19 +16,24 @@ public class PokerEvent {
     this.sender = sender;
   }
 
+  private boolean isActive() {
+    return count <= productBacklogItems.size();
+  }
+
   /** 見積もり結果を送信します */
   private void send() {
     sender.send(productBacklogItems);
   }
 
   /** メンバーの見積もり結果を受け取ります */
-  public void receive(ProductBacklogItem productBacklogItem) {
-    if (count >= productBacklogItems.size()) {
+  public void receive(ProductBacklogItem productBacklogItem) throws IllegalStateException {
+    if (isActive()) {
       productBacklogItems.add(productBacklogItem);
+      if (count == productBacklogItems.size()) {
+        send();
+      }
+    } else {
+      throw new IllegalStateException("No more requests can be accepted");
     }
-    if (count == productBacklogItems.size()) {
-      send();
-    }
-    // todo(例外をはく)
   }
 }
