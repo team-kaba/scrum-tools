@@ -17,7 +17,7 @@ public class PokerEvent {
   }
 
   private boolean isActive() {
-    return count <= productBacklogItems.size();
+    return count >= productBacklogItems.size();
   }
 
   /** 見積もり結果を送信します */
