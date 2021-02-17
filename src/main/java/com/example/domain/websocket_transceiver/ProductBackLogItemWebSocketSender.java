@@ -21,21 +21,6 @@ public class ProductBackLogItemWebSocketSender implements ProductBacklogItemSend
     this.mapper = mapper;
   }
 
-  // public void send(List<RefinementActor> refinementActors) {
-  //  refinementActors.forEach(
-  //      e -> {
-  //        WebSocketMessage<String> message;
-  //        try {
-  //          message = createWebSocketMessage(e.getProductBacklogItem());
-  //          e.getWebSocketSession().sendMessage(message);
-  //        } catch (JsonProcessingException jsonProcessingException) {
-  //          jsonProcessingException.printStackTrace();
-  //        } catch (IOException exception) {
-  //          exception.printStackTrace();
-  //        }
-  //      });
-  // }
-
   private TextMessage createWebSocketMessage(List<ProductBacklogItem> productBacklogItems)
       throws JsonProcessingException {
     return new TextMessage(mapper.writeValueAsString(productBacklogItems));
