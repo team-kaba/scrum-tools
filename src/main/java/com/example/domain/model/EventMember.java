@@ -11,15 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EventMember implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private UUID uuid;
+  private UUID uuid;
 
-    @NotBlank
-    @Size(max = 12)
-    private String hostName;
+  @NotBlank
+  @Size(max = 12)
+  private String hostName;
 
-    @NotBlank
-    @Size(max = 12)
-    private List<String> guestNames;
+  @NotBlank
+  @Size(max = 12)
+  private List<String> guestNames;
 }
