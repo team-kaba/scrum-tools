@@ -18,7 +18,7 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: { }
+                properties: {}
           headers:
             header-0:
               schema:
@@ -79,11 +79,11 @@ paths:
                   story_point: 12
                   confident_degree: 1
                   access_at: '2021-01-21T00:00:21Z'
-    parameters: [ ]
+    parameters: []
   /product-backlog-items:
     get:
       summary: Your GET endpoint
-      tags: [ ]
+      tags: []
       responses:
         '200':
           description: OK
