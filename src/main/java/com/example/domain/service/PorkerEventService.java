@@ -15,12 +15,12 @@ public class PorkerEventService {
     this.porkerEventRepository = porkerEventRepository;
   }
 
-  public void registerMember(EventMember eventMember){
+  public void registerMember(EventMember eventMember) {
     eventMember.setUuid(UUID.randomUUID());
     porkerEventRepository.registerMember(eventMember);
   }
 
-  public List<EventMember> fetchEventMember(){
+  public List<EventMember> fetchEventMember() {
     return porkerEventRepository.fetch();
   }
 }
