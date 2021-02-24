@@ -19,12 +19,6 @@ public class ProductBacklogItemController {
     this.productBacklogItemService = productBacklogItemService;
   }
 
-  @PostMapping(path = "product-backlog-item/create")
-  ResponseEntity<Void> postProductBacklogItem(@RequestParam("amount") String amount) {
-    productBacklogItemService.create(Integer.parseInt(amount));
-    return new ResponseEntity(HttpStatus.CREATED);
-  }
-
   @GetMapping(path = "product-backlog-items")
   ResponseEntity<List<ProductBacklogItem>> getProductBacklogItem(
       @RequestParam("amount") String amount) {

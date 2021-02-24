@@ -1,5 +1,6 @@
 package com.example.domain.websocket_transceiver;
 
+import com.example.domain.model.EventMember;
 import com.example.domain.model.PokerEvent;
 import com.example.domain.model.ProductBacklogItem;
 import org.springframework.stereotype.Component;
@@ -10,8 +11,8 @@ public class ProductBacklogItemWebSocketReceiver {
   private PokerEvent pokerEvent;
   private final ProductBackLogItemWebSocketSender sender;
 
-  public void create(int amount) {
-    this.pokerEvent = new PokerEvent(amount, sender);
+  public void create(EventMember eventMember) {
+    this.pokerEvent = new PokerEvent(eventMember, sender);
   }
 
   public ProductBacklogItemWebSocketReceiver(ProductBackLogItemWebSocketSender sender) {
