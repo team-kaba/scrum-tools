@@ -19,61 +19,56 @@ import java.util.Map;
 @RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @Autowired
-    MessageSource messageSource;
+  @Autowired MessageSource messageSource;
 
-    private final Map<Class<? extends Exception>, String> messageMappings =
-            Collections.unmodifiableMap(new LinkedHashMap() {{
-                put(HttpMessageNotReadableException.class,
-                        "Request body is invalid");
-                put(MethodArgumentNotValidException.class,
-                        "Request value is invalid");
-            }});
+  private final Map<Class<? extends Exception>, String> messageMappings =
+      Collections.unmodifiableMap(
+          new LinkedHashMap() {
+            {
+              put(HttpMessageNotReadableException.class, "Request body is invalid");
+              put(MethodArgumentNotValidException.class, "Request value is invalid");
+            }
+          });
 
-    private String resolveMessage(Exception ex, String defaultMessage) {
-        return messageMappings.entrySet().stream()
-                .filter(entry -> entry.getKey().isAssignableFrom(ex.getClass()))
-                .findFirst()
-                .map(Map.Entry::getValue).orElse(defaultMessage);
-    }
+  private String resolveMessage(Exception ex, String defaultMessage) {
+    return messageMappings.entrySet().stream()
+        .filter(entry -> entry.getKey().isAssignableFrom(ex.getClass()))
+        .findFirst()
+        .map(Map.Entry::getValue)
+        .orElse(defaultMessage);
+  }
 
-    private ApiError createApiError(Exception ex, String defaultMessage) {
-        ApiError apiError = new ApiError();
-        apiError.setMessage(resolveMessage(ex, defaultMessage));
-        return apiError;
-    }
+  private ApiError createApiError(Exception ex, String defaultMessage) {
+    ApiError apiError = new ApiError();
+    apiError.setMessage(resolveMessage(ex, defaultMessage));
+    return apiError;
+  }
 
-    private String getMessage(
-            MessageSourceResolvable resolvable, WebRequest request
-    ) {
-        return messageSource.getMessage(resolvable, request.getLocale());
-    }
+  private String getMessage(MessageSourceResolvable resolvable, WebRequest request) {
+    return messageSource.getMessage(resolvable, request.getLocale());
+  }
 
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex, HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
+  @Override
+  protected ResponseEntity<Object> handleMethodArgumentNotValid(
+      MethodArgumentNotValidException ex,
+      HttpHeaders headers,
+      HttpStatus status,
+      WebRequest request) {
 
-        ApiError apiError = createApiError(ex, ex.getMessage());
-        ex.getBindingResult().getGlobalErrors().stream()
-                .forEach(e -> apiError.addDetail(e.getObjectName(), getMessage(e, request)));
-        ex.getBindingResult().getFieldErrors().stream()
-                .forEach(e -> apiError.addDetail(e.getField(), getMessage(e, request)));
-        return super.handleExceptionInternal(
-                ex, apiError, headers, status, request
-        );
-    }
+    ApiError apiError = createApiError(ex, ex.getMessage());
+    ex.getBindingResult().getGlobalErrors().stream()
+        .forEach(e -> apiError.addDetail(e.getObjectName(), getMessage(e, request)));
+    ex.getBindingResult().getFieldErrors().stream()
+        .forEach(e -> apiError.addDetail(e.getField(), getMessage(e, request)));
+    return super.handleExceptionInternal(ex, apiError, headers, status, request);
+  }
 
-    @Override
-    protected ResponseEntity<Object> handleExceptionInternal(
-            Exception ex, Object body, HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
+  @Override
+  protected ResponseEntity<Object> handleExceptionInternal(
+      Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-        ApiError apiError = createApiError(ex, ex.getMessage());
+    ApiError apiError = createApiError(ex, ex.getMessage());
 
-        return super.handleExceptionInternal(
-                ex, apiError, headers, status, request
-        );
-    }
-
+    return super.handleExceptionInternal(ex, apiError, headers, status, request);
+  }
 }
