@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.domain.model.EventMember;
-import com.example.domain.model.PokerEvent;
 import com.example.domain.service.PokerEventService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -22,15 +21,15 @@ public class PokerEventController {
   }
 
   @PostMapping(path = "porker-event/create")
-  ResponseEntity<Void> postProductBacklogItem(
+  ResponseEntity postProductBacklogItem(
       @RequestParam("amount") String amount, @RequestBody EventMember eventMember) {
     pokerEventService.create(eventMember);
     return new ResponseEntity(HttpStatus.CREATED);
   }
 
   @GetMapping(path = "host-list/search")
-  ResponseEntity<List<PokerEvent>> getPokerEvents() {
-    final List<PokerEvent> pokerEvents = pokerEventService.fetchEventMember();
-    return new ResponseEntity<List<PokerEvent>>(pokerEvents, HttpStatus.ACCEPTED);
+  ResponseEntity<List<EventMember>> getPokerEvents() {
+    final List<EventMember> eventMembers = pokerEventService.fetchEventMember();
+    return new ResponseEntity<>(eventMembers, HttpStatus.ACCEPTED);
   }
 }

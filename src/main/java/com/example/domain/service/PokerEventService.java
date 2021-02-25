@@ -1,7 +1,6 @@
 package com.example.domain.service;
 
 import com.example.domain.model.EventMember;
-import com.example.domain.model.PokerEvent;
 import com.example.domain.websocket_transceiver.ProductBacklogItemWebSocketReceiver;
 import com.example.infra.PokerEventRepository;
 import java.util.List;
@@ -26,7 +25,7 @@ public class PokerEventService {
     pokerEventRepository.registerMember(eventMember);
   }
 
-  public List<PokerEvent> fetchEventMember() {
+  public List<EventMember> fetchEventMember() {
     return pokerEventRepository.fetch();
   }
 }
