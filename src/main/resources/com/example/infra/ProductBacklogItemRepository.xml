@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.infra.ProductBacklogItemRepository">
-    <insert id="insert" parameterType="com.example.domain.model.ProductBacklogItem">
-        INSERT
-        INTO product_backlog_item (story_point, confident_degree, name, access_at)
-        VALUES (#{storyPoint}, #{confidentDegree}, #{name}, #{accessAt})
-    </insert>
-    <select id="select" resultType="com.example.domain.model.ProductBacklogItem">
-        SELECT
-          story_point,
-          confident_degree,
-          name
-        FROM
-          product_backlog_item
-        ORDER BY
-          access_at
-    </select>
+  <insert id="insert" parameterType="com.example.domain.model.ProductBacklogItem">
+    INSERT
+    INTO product_backlog_item (story_point, confident_degree, name, access_at)
+    VALUES (#{storyPoint}, #{confidentDegree}, #{name}, #{accessAt})
+  </insert>
+  <select id="select" resultType="com.example.domain.model.ProductBacklogItem">
+    SELECT
+    story_point,
+    confident_degree,
+    name
+    FROM
+    product_backlog_item
+    ORDER BY
+    access_at
+  </select>
 </mapper>

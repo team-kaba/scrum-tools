@@ -3,12 +3,11 @@ package com.example.domain.service;
 import com.example.domain.model.ProductBacklogItem;
 import com.example.domain.websocket_transceiver.ProductBacklogItemWebSocketReceiver;
 import com.example.infra.ProductBacklogItemRepository;
+import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.socket.WebSocketSession;
-
-import java.util.List;
 
 @Transactional
 @Service
@@ -34,7 +33,4 @@ public class ProductBacklogItemService {
     return repository.select(rowBounds);
   }
 
-  public void create(int amount) {
-    receiver.create(amount);
-  }
 }
