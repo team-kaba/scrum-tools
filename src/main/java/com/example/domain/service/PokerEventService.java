@@ -4,9 +4,9 @@ import com.example.domain.model.EventMember;
 import com.example.domain.websocket_transceiver.ProductBacklogItemWebSocketReceiver;
 import com.example.infra.PokerEventRepository;
 import java.util.List;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class PokerEventService {
 
   private final PokerEventRepository pokerEventRepository;
