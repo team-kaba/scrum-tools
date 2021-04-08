@@ -21,15 +21,15 @@ public class PokerEventController {
   }
 
   @PostMapping(path = "porker-event/create")
-  ResponseEntity postProductBacklogItem(
+  ResponseEntity<Object> createPokerEvent(
       @RequestParam("amount") String amount, @RequestBody EventMember eventMember) {
     pokerEventService.create(eventMember);
-    return new ResponseEntity(HttpStatus.CREATED);
+    return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
   @GetMapping(path = "host-list/search")
   ResponseEntity<List<EventMember>> getPokerEvents() {
-    final List<EventMember> eventMembers = pokerEventService.fetchEventMember();
+    List<EventMember> eventMembers = pokerEventService.fetchEventMember();
     return new ResponseEntity<>(eventMembers, HttpStatus.ACCEPTED);
   }
 }
