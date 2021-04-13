@@ -10,9 +10,7 @@
   </insert>
   <select id="select" resultType="com.example.domain.model.ProductBacklogItem">
     SELECT
-    story_point,
-    confident_degree,
-    name
+    story_point, confident_degree, name
     FROM
     product_backlog_item
     ORDER BY

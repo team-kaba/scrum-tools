@@ -5,11 +5,19 @@ import java.util.List;
 
 public class PokerEvent {
 
+  private static final PokerEvent instance = new PokerEvent();
   private final List<ProductBacklogItem> productBacklogItems = new ArrayList<>();
-  private final ProductBacklogItemSender sender;
-  private final EventMember eventMember;
 
-  public PokerEvent(EventMember eventMember, ProductBacklogItemSender sender) {
+  private ProductBacklogItemSender sender;
+  private EventMember eventMember;
+
+  private PokerEvent() {}
+
+  public static PokerEvent of() {
+    return PokerEvent.instance;
+  }
+
+  public void create(EventMember eventMember, ProductBacklogItemSender sender) {
     this.eventMember = eventMember;
     this.sender = sender;
   }
@@ -27,11 +35,9 @@ public class PokerEvent {
   public void receive(ProductBacklogItem productBacklogItem) throws IllegalStateException {
     if (isActive()) {
       productBacklogItems.add(productBacklogItem);
-      if (eventMember.countMember() == productBacklogItems.size()) {
+      if (eventMember.countMember() == productBacklogItems.size())
         send();
-      }
-    } else {
+    } else
       throw new IllegalStateException("No more requests can be accepted");
-    }
   }
 }
