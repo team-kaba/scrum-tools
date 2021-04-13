@@ -1,42 +1,29 @@
 package com.example.controller;
 
 import com.example.domain.model.ProductBacklogItem;
-import com.example.domain.resource.ProductBacklogItemResource;
 import com.example.domain.service.ProductBacklogItemService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("product-backlog-item")
 public class ProductBacklogItemController {
 
-    private final ProductBacklogItemService productBacklogItemService;
+  private final ProductBacklogItemService productBacklogItemService;
 
-    public ProductBacklogItemController(
-            ProductBacklogItemService productBacklogItemService
-    ) {
-        this.productBacklogItemService = productBacklogItemService;
-    }
+  @Autowired
+  public ProductBacklogItemController(ProductBacklogItemService productBacklogItemService) {
+    this.productBacklogItemService = productBacklogItemService;
+  }
 
-    @PostMapping(path = "create")
-    ResponseEntity<Void> postProductBacklogItem(
-            @Validated
-            @RequestBody ProductBacklogItemResource productBacklogItemResource
-    ) {
-        productBacklogItemService.insert(productBacklogItemResource);
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
-
-    @GetMapping("{amount}")
-    ResponseEntity<List<ProductBacklogItem>> getProductBacklogItem(
-            @PathVariable String amount
-    ) {
-        final List<ProductBacklogItem> productBacklogItems
-                = productBacklogItemService.select(amount);
-        return new ResponseEntity(productBacklogItems, HttpStatus.OK);
-    }
+  @GetMapping(path = "product-backlog-items")
+  ResponseEntity<List<ProductBacklogItem>> getProductBacklogItem(
+      @RequestParam("amount") String amount) {
+    List<ProductBacklogItem> productBacklogItems = productBacklogItemService.select(amount);
+    return new ResponseEntity<>(productBacklogItems, HttpStatus.OK);
+  }
 }

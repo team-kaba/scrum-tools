@@ -122,11 +122,10 @@ components:
           type: string
           example: taro
         story_point:
-          type: integer
-          example: 0
-          minimum: 0
-        confident_degree:
           type: string
+          example: 0
+        confident_degree:
+          type: integer
           example: 'フィボナッチ数列,「?」,「∞」'
         access_at:
           type: string
