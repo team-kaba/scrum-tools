@@ -16,13 +16,17 @@ public class EventMember implements Serializable {
 
   @NotBlank
   @Size(max = 12)
-  private String hostName;
+  private String accountId;
 
   @NotBlank
   @Size(max = 12)
   private List<String> guestNames;
 
+  public static boolean register() {
+    return true;
+  }
+
   public int countMember() {
-    return numHost + guestNames.size();
+    return EventMember.numHost + guestNames.size();
   }
 }
