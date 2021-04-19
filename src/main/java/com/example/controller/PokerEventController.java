@@ -23,7 +23,7 @@ public class PokerEventController {
     this.pokerEventService = pokerEventService;
   }
 
-  @PostMapping(path = "poker-event/register")
+  @PostMapping(path = "poker-event/create")
   ResponseEntity<PokerEventCreateResponse> createPokerEvent(
       @RequestParam("account_id") String accountId, @RequestBody EventMember eventMember) {
     Host host = pokerEventService.create(eventMember, accountId);
