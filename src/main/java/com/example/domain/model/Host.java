@@ -1,6 +1,5 @@
 package com.example.domain.model;
 
-import com.example.infra.HostRepository;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Host {
+  private static final int COUNT = 1;
   private String hostId;
   private String accountId;
 
@@ -16,8 +16,7 @@ public class Host {
     this.accountId = accountId;
   }
 
-  public boolean register(HostRepository hostRepository) {
-    hostRepository.register(this);
-    return true;
+  public static int getCount() {
+    return Host.COUNT;
   }
 }

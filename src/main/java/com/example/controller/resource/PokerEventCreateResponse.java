@@ -11,4 +11,6 @@ public class PokerEventCreateResponse implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private String hostId;
+
+  private String eventId;
 }

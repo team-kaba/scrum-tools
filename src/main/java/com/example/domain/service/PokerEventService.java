@@ -35,11 +35,12 @@ public class PokerEventService {
    * @return ホスト
    */
   public Host create(EventMember eventMember, String accountId) {
+    // todo : PokerEventのdomainにホストを作成する仕様を含めるべき？
     PokerEvent.of().create(eventMember, sender);
     pokerEventRepository.registerMember(eventMember);
 
     Host host = new Host(accountId);
-    host.register(hostRepository);
+    hostRepository.register(host);
     return host;
   }
 
