@@ -17,7 +17,7 @@ public class HostController {
     this.hostService = hostService;
   }
 
-  @PostMapping(path = "create")
+  @PostMapping(path = "/create")
   public Host create(@RequestParam("account_id") String accountId) {
     return hostService.create(accountId);
   }

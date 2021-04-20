@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.domain.model.Guest;
 import com.example.domain.service.GuestService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ public class GuestController {
     this.guestService = guestService;
   }
 
+  @PostMapping(path = "/create")
   public Guest create(String accountId) {
     return guestService.create(accountId);
   }
